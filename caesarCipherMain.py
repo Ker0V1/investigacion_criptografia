@@ -44,7 +44,6 @@ def getConsoleArguments() -> argparse.Namespace:
                         help='Decrypt the text instead of encrypting it.')
     return parser.parse_args()
 
-
 def createPlot(frequency, shift, alphabet, resultsPath):
     """
     Creates and saves a bar plot of letter frequencies.
