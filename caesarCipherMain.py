@@ -18,6 +18,7 @@ def getConsoleArguments() -> argparse.Namespace:
         argparse.Namespace: An object containing the parsed command-line arguments.
     Arguments:
         --text (str): The text to encrypt and analyze.
+        --shift (int): The shift value for the Caesar Cipher (default: 3).
         --saveFrecuencyTable (bool): If set, saves the frequency table to a CSV file.
         --savePlots (bool): If set, saves frequency plots for each shift.
         --savePossibleShifts (bool): If set, saves all possible shifts to a txt file.
@@ -30,6 +31,7 @@ def getConsoleArguments() -> argparse.Namespace:
         description="Encrypt text using Caesar Cipher and analyze frequencies.")
     parser.add_argument('--text', type=str,
                         help='The text to encrypt and analyze.')
+    parser.add_argument('--shift', type=int, default=3, help='The shift value for the Caesar Cipher (default: 3)')
     parser.add_argument('--saveFrecuencyTable', action='store_true',
                         help='Save the frequency table to a CSV file.')
     parser.add_argument('--savePlots', action='store_true',
@@ -66,7 +68,6 @@ def createPlot(frequency, shift, alphabet, resultsPath):
 
     plt.close(fig)  # close the figure to free memory
 
-
 def cleanText(text) -> str:
     """
     Cleans the input text by performing several normalization steps.
@@ -89,7 +90,6 @@ def cleanText(text) -> str:
 
     return text
 
-
 if __name__ == "__main__":
 
     args = getConsoleArguments()
@@ -101,11 +101,18 @@ if __name__ == "__main__":
 
     text = cleanText(text)
 
-    if args.saveFrecuencyTable or args.savePlots or args.savePossibleShifts:
-        checkPath(os.path.abspath(args.resultsPath))
-
     cipher = caesarCipher()
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    
+    
+    if not (args.saveFrecuencyTable or args.savePlots or args.savePossibleShifts):
+        cipher.setConfig({'shift': args.shift, 'alphabet': alphabet})
+        
+        modifiedText = cipher.encrypt(text) if not args.decrypt else cipher.decrypt(text)
+        print(f"{'Decrypted' if args.decrypt else 'Encrypted'} text: {modifiedText}")
+        exit(0)
+
+    checkPath(os.path.abspath(args.resultsPath))
 
     frequencyTable = pd.DataFrame(columns=list(alphabet))
 
