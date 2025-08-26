@@ -3,10 +3,28 @@ import random
 
 
 class DiffieHellman:
+    """
+    Implements the Diffie-Hellman key exchange protocol for secure key generation and sharing.
+
+    Attributes:
+        _p (int | None): The prime number used for the key exchange.
+        _g (int | None): The generator used for the key exchange.
+        config (dict): Configuration dictionary containing the prime file path.
+    """
+
     _p = None
     _g = None
 
     def __init__(self, p: int | None = None, g: int | None = None):
+        """
+        Initializes the DiffieHellman instance with optional prime and generator values.
+        If not provided, primes are loaded from a file.
+
+        Args:
+            p (int | None): Optional prime number.
+            g (int | None): Optional generator.
+        """
+
         self.config = {
             "primeFile": "primes.txt",
         }
@@ -20,6 +38,11 @@ class DiffieHellman:
             self.setPrimes()
 
     def setPrimes(self):
+        """
+        Loads prime and generator values from a file if they are not already set.
+        Selects random values for the prime and generator from the file.
+        """
+
         if self._p is not None and self._g is not None:
             return
 
@@ -38,18 +61,51 @@ class DiffieHellman:
             self._g = int(primes[gIndex])
 
     def getPrime(self) -> int | None:
+        
+        """
+        Returns the current prime number used for the key exchange.
+
+        Returns:
+            int | None: The prime number, or None if not set.
+        """
         return self._p
 
     def getGenerator(self) -> int | None:
+        """
+        Returns the current generator used for the key exchange.
+
+        Returns:
+            int | None: The generator, or None if not set.
+        """
         return self._g
 
     def getPublicKey(self, privateKey: int) -> int | None:
+        """
+        Computes the public key from a given private key using the Diffie-Hellman algorithm.
+
+        Args:
+            privateKey (int): The private key.
+
+        Returns:
+            int | None: The computed public key, or None if prime or generator is not set.
+        """
         if (self._p is None) or (self._g is None):
             return None
 
         return pow(self._g, privateKey, self._p)
 
     def getSharedKey(self, publicKey: int, privateKey: int) -> int | None:
+        """
+        Computes the shared secret key using a public key and a private key.
+
+        Args:
+            publicKey (int): The public key received from the other party.
+            privateKey (int): The private key of the current party.
+
+        Returns:
+            int | None: The computed shared key, or None if prime or generator is not set.
+        """
+        
         if (self._p is None) or (self._g is None):
             return None
 
