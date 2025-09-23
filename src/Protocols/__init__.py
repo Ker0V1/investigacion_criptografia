@@ -1,6 +1,7 @@
 import os
 import random
 
+from .SPDHEC import *
 
 class DiffieHellman:
     """

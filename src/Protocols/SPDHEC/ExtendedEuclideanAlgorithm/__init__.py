@@ -1,8 +1,14 @@
 class ExtendedEuclideanAlgorithm:
     """
-    Implementación del Algoritmo Extendido de Euclides para enteros grandes.
-    Calcula d = gcd(a, b) = a*S + b*T, y permite recuperar S, T y d.
+    Implements the Extended Euclidean Algorithm for two integers.
+    Attributes:
+        a (int): The first integer.
+        b (int): The second integer.
+        S (int): The coefficient for 'a' in the equation d = S*a + T*b, where d is the GCD.
+        T (int): The coefficient for 'b' in the equation d = S*a + T*b, where d is the GCD.
+        d (int): The greatest common divisor (GCD) of 'a' and 'b'.
     """
+    
 
     def __init__(self, temp_a, temp_b):
         self.a = temp_a

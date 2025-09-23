@@ -1,5 +1,5 @@
 from bitstring import BitArray
-from src.SPDHEC.ExtendedEuclideanAlgorithm import ExtendedEuclideanAlgorithm
+from ..ExtendedEuclideanAlgorithm import ExtendedEuclideanAlgorithm
 import secrets
 
 
