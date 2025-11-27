@@ -10,15 +10,86 @@ Prerequisites
 - Python 3.8+ (recommended)
 - pip
 
-Install dependencies
+This project requires the following dependencies:
 --------------------
 
-From the project root:
+- bitarray==3.5.2
+- bitstring==4.3.1
+- contourpy==1.3.2
+- cycler==0.12.1
+- fonttools==4.58.1
+- kiwisolver==1.4.8
+- matplotlib==3.10.3
+- numpy==2.2.6
+- packaging==25.0
+- pandas==2.2.3
+- pillow==11.2.1
+- pyparsing==3.2.3
+- python-dateutil==2.9.0.post0
+- pytz==2025.2
+- six==1.17.0
+- tzdata==2025.2
+
+To install it automatically, from the project root run:
 
 ```sh
 pip install -r requirements.txt
 ```
 
+Docker Setup 
+--------------------------------------------------
+
+### Prerequisites for Docker Setup
+
+Before you can use Docker to run this project, you need to install Docker and Docker Compose on your system. 
+
+**Installation Guide**: Follow the official Docker documentation to install Docker Desktop on your machine:
+- [Docker Desktop Installation Guide](https://docs.docker.com/desktop/)
+
+Docker Desktop includes both Docker and Docker Compose, making it easy to set up your development environment.
+
+### Instructions to Build and Run the Docker Container
+
+Once Docker is installed, follow these steps:
+
+1. **Build the Docker Container**:
+   Run the following command in your terminal to build the Docker container:
+   ```bash
+   docker-compose build
+   ```
+
+2. **Run the Docker Container**:
+   After building the container, you can start it with:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Connect to the Container's Terminal**:
+   To access the terminal of the running container, use:
+   ```bash
+   docker exec -it python_dev_container /bin/sh
+   ```
+   
+   Once inside the container, you can run any of the Python scripts from the examples below.
+
+### Alternative: Use Visual Studio Code DevContainers
+
+Visual Studio Code offers a convenient way to develop inside a Docker container using the **Dev Containers** extension.
+
+**Prerequisites**:
+- Docker must be installed on your system (see the Docker Desktop Installation Guide above)
+- Visual Studio Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+**Steps**:
+1. Open this project folder in Visual Studio Code
+2. Click the green icon in the bottom-left corner and select "Reopen in Container"
+3. VS Code will build and start the Docker container automatically
+4. You can now use the integrated terminal to run Python scripts directly inside the container
+
+This approach provides a seamless development experience with full IDE integration while running code in an isolated Docker environment.
+
+Important 
+--------------------------------------------------
 Run commands from the repository root so `src/` is on the import path.
 
 Detailed examples for every demo (all flags/options)
