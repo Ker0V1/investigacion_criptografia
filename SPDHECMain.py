@@ -239,11 +239,19 @@ class SPDHEC:
         """
         
         results = []
+        
+        aliceTries = 0
+        bobTries = 0
+
         for alice_priv in range(1, self.ec.ecOrder):
             for bob_priv in range(1, self.ec.ecOrder):
                 
+                aliceTries += 1
+                bobTries += 1
+
                 test_pub_alice = self.getPublicKey(self.G, alice_priv)
                 test_pub_bob = self.getPublicKey(self.G, bob_priv)
+                
                 if (test_pub_alice.x == publicKeyAlice.x and test_pub_alice.y == publicKeyAlice.y   
                     and
                     test_pub_bob.x == publicKeyBob.x and test_pub_bob.y == publicKeyBob.y):
@@ -254,6 +262,10 @@ class SPDHEC:
                             'AlicePrivateKey': alice_priv,
                             'BobPrivateKey': bob_priv
                         })
+
+                if bobTries % 1000 == 0:
+                    print(f"Checked {aliceTries} Alice keys and {bobTries} Bob keys so far...")
+
         return results
 
 
