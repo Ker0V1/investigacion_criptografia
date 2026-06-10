@@ -107,7 +107,7 @@ Flags and behavior:
 - `--alpha INT` : coefficient α (default: 19)
 - `--beta INT` : coefficient β (default: 11)
 - `--CheckAllCombinations` : brute-force all coprime α and β values and save results
-- `--savePathAllCombinations PATH` : file path to write the all-combinations CSV
+- `--savePathAllCombinations PATH` : directory for output files (default: `../results/affineCipher`)
 
 Examples:
 
@@ -120,7 +120,7 @@ python affineCipherMain.py --text "hello world"
 - Decrypt with explicit key:
 
 ```sh
-python affineCipherMain.py --text "xuo jxuhu" --decrypt --alpha 19 --beta 11
+python affineCipherMain.py --text "ojmmr nrwmq" --decrypt --alpha 19 --beta 11
 ```
 
 - Encrypt with custom α/β:
@@ -132,7 +132,7 @@ python affineCipherMain.py --text "secret msg" --alpha 5 --beta 8
 - Brute-force all valid α,β and save CSV (useful to recover keys):
 
 ```sh
-python affineCipherMain.py --text "ciphertext_here" --CheckAllCombinations --savePathAllCombinations results/affineCipher/shifts.csv
+python affineCipherMain.py --text "ciphertext_here" --CheckAllCombinations --savePathAllCombinations results/affineCipher
 ```
 
 2) Caesar cipher (`caesarCipherMain.py`)
@@ -259,7 +259,7 @@ Long-running analysis:
 python saesCipherMain.py --saveFrequencyPlots --savePathFrequencyPlots results/SAES
 
 # Enumerate all 65536 keys and write subkeys CSV (very slow)
-python saesCipherMain.py --CheckAllCombinations --savePathAllCombinations results/saes/keys.csv
+python saesCipherMain.py --CheckAllCombinations --savePathAllCombinations results/SAES/keys.csv
 ```
 
 5) S-PDH-EC (`SPDHECMain.py`)
